@@ -286,7 +286,7 @@ def start(message):
 def message_handler(message):
     us = getUserFromChannel(message.chat.id)
     msg = bot.send_message(message.chat.id, """\
-                Juda soz!!!, Ismingizni yozing
+                Juda soz!!!, Tugmalardan birini bosing yoki /start /help ni bosing
                 """)
     if us == 'member':
         if message.text == "🧕 Xijobli 🌙":
