@@ -212,11 +212,12 @@ def gen_markup():
 def getUserFromChannel(userId):
     u = bot.get_chat_member(channelId, userId)
     u1 = bot.get_chat_member(channelId1, userId)
+    a = 'left'
     if u.status == 'member':
         if u1.status == 'member':
             a = 'member'
         else:
-            a = 'none'
+            a = 'left'
     return a
 
 
