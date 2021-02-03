@@ -5,6 +5,9 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeybo
 import os, sys
 from PIL import Image, ImageDraw, ImageFont
 import random
+import requests
+from bs4 import BeautifulSoup as BS
+
 
 TELEGRAM_TOKEN = '1344114096:AAHHt1B0-LtNJpmP5YaeP4bSNuUvSIQqE4c'
 
@@ -271,7 +274,97 @@ def process_name_step_d(message):
     except Exception as e:
         bot.reply_to(message, 'oooops')
 
+def GetMeTdau(name, pwd):
+    yilqi = 'http://moodle.tdau.uz/course/view.php?id=5389'
+    qaytaish = 'http://moodle.tdau.uz/course/view.php?id=5392'
+    qoramol = 'http://moodle.tdau.uz/course/view.php?id=5390'
+    naslishi = 'http://moodle.tdau.uz/course/view.php?id=5395'
+    joja = 'http://moodle.tdau.uz/course/view.php?id=5394'
+    try:
+        s = requests.Session()
 
+            # get SCRF
+        auth_html = s.get('http://moodle.tdau.uz/')
+        auth_bs = BS(auth_html.content, 'html.parser')
+        csrf = auth_bs.select('input[name=logintoken]')[0]['value']
+
+        payload = {
+            'anchor': '',
+            'logintoken': csrf,
+            'username': name,
+            'password': pwd
+            }
+
+        answ = s.post('http://moodle.tdau.uz/login/', data=payload)
+
+        if answ.status_code == 200:
+            s.get(yilqi)
+            s.get(qoramol)
+            s.get(qaytaish)
+            s.get(naslishi)
+            s.get(joja)
+        if answ.status_code == 200:
+            sms = 'Ijobiy'
+        else:
+            sms = 'Salbiy'
+    except:
+        bot.send_message(914886587, 'xatolik')
+    return sms
+
+
+@bot.message_handler(commands=['tdau', 'tdau6', 'tdau16', 'tdau17', 'tdau18', 'tdau19', 'tdau20', 'tdau21',  'tdau22', 'tdau23', 'tdau24'])
+def start(message):
+    login6 = '9217-6'
+    login16 = '9217-16'
+    login17 = '9217-17'
+    login18 = '9217-18'
+    login19 = '9217-19'
+    login20 = '9217-20'
+    login21 = '9217-21'
+    login22 = '9217-22'
+    login23 = '9217-23'
+    login24 = '9217-24'
+    pwd1 = "oy2020oy"
+    pwd2 = "tk2020tk"
+    pwd3 = "orzu1997"
+    pwd4 = "Bobur1126"
+    pwd5 = "94202094"
+    pwd6 = "ozoda2020"
+    pwd7 = "agrar@2020"
+    try:
+        if message.text == "/tdau6":
+            SMS = GetMeTdau(login6, pwd1)
+        elif message.text == "/tdau16":
+            SMS = GetMeTdau(login16, pwd2)
+            bot.send_message(message.chat.id, SMS)
+        elif message.text == "/tdau17":
+            SMS = GetMeTdau(login17, pwd5)
+            bot.send_message(message.chat.id, SMS)
+        elif message.text == "/tdau18":
+            SMS = GetMeTdau(login18, pwd4)
+            bot.send_message(message.chat.id, SMS)
+        elif message.text == "/tdau19":
+            SMS = GetMeTdau(login19, pwd3)
+            bot.send_message(message.chat.id, SMS)
+        elif message.text == "/tdau20":
+            SMS = GetMeTdau(login20, pwd5)
+            bot.send_message(message.chat.id, SMS)
+        elif message.text == "/tdau21":
+            SMS = GetMeTdau(login21, pwd5)
+            bot.send_message(message.chat.id, SMS)
+        elif message.text == "/tdau22":
+            SMS = GetMeTdau(login22, pwd6)
+            bot.send_message(message.chat.id, SMS)
+        elif message.text == "/tdau23":
+            SMS = GetMeTdau(login23, pwd7)
+            bot.send_message(message.chat.id, SMS)
+        elif message.text == "/tdau24":
+            SMS = GetMeTdau(login24, pwd5)
+            bot.send_message(message.chat.id, SMS)
+        else:
+            bot.send_message(message.chat.id, "((")
+    except:
+        bot.send_message(message.chat.id, "(((")
 
 @bot.message_handler(commands=['start','help'])
 def start(message):
