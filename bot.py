@@ -9,7 +9,7 @@ import requests
 from bs4 import BeautifulSoup as BS
 
 
-T = '1344114096:AAHCXopmRY3zLh0d-EI6JILE94KYk6puMNo'
+T = ''
 
 bot = telebot.TeleBot(T)
 
