@@ -9,9 +9,9 @@ import requests
 from bs4 import BeautifulSoup as BS
 
 
-TELEGRAM_TOKEN = '1486165557:AAFXzapccA1y7tr5o7SUvalVUL3Uyig7qDk'
+T = '1344114096:AAHCXopmRY3zLh0d-EI6JILE94KYk6puMNok'
 
-bot = telebot.TeleBot(TELEGRAM_TOKEN)
+bot = telebot.TeleBot(T)
 
 channelId = -1001390673326
 channelId1 = -1001462619192
